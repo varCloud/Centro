@@ -1,0 +1,2 @@
+[02-May-2016 03:12:59 UTC] PHP Warning:  require(/../../../autoload.php): failed to open stream: No such file or directory in /home/taddibri/public_html/rest/vendor/slim/slim/example/index.php on line 9
+[02-May-2016 03:12:59 UTC] PHP Fatal error:  require(): Failed opening required '/../../../autoload.php' (include_path='.;/path/to/php/pear') in /home/taddibri/public_html/rest/vendor/slim/slim/example/index.php on line 9
