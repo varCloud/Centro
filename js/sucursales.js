@@ -334,8 +334,8 @@ function Guardar(esActualizacion,idSucursal)
     alert(name +" "+size+" "+imagen);    //etc.
 });
 
- var  myFile = $('#fileupload').serializeArray();
- alert(myFile);
+LimpiarTablaFiles();
+
  alert(JSON.stringify(myFile));
   if($("#formSucursal").valid())
   {
@@ -430,6 +430,16 @@ function Asignar()
           }
       });
 
+}
+
+function LimpiarTablaFiles()
+{
+   $(".template-download").remove();
+   $('#fileupload').fileupload({
+        // Uncomment the following to send cross-domain cookies:
+        //xhrFields: {withCredentials: true},
+        url: 'fu/server/php/index.php'
+    });
 }
 
 /*ESTE ES PARA SELECIONAR TODOS LOS COMBOS DE UNA TABALA
