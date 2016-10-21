@@ -325,39 +325,45 @@ function addDpto(idSucursal)
 
 function Guardar(esActualizacion,idSucursal)
 {
+
+  $('tbody.files tr').each(function(i, e) {
+    //according to @Brandon's comment it's now p.name
+    var name = $(e).find('td').find('span.preview').find('a').attr('title'); 
+    var size = $(e).find('td').find('p.name').find('a').attr('title');
+    var imagen = $(e).find('td').find('span.preview').find('a').attr('href');  
+    alert(name +" "+size+" "+imagen);    //etc.
+});
+
+ var  myFile = $('#fileupload').serializeArray();
+ alert(myFile);
+ alert(JSON.stringify(myFile));
   if($("#formSucursal").valid())
   {
-     if(validaRangos())
-     {
-		CrearObj();
 	    var count = Object.keys(cal.calendario).length;
 	   	if(count > 0)
 	   	{
-			geocoder.geocode({ 'address': $("#direccion").val() }, function (results, status) {
-				if (status == google.maps.GeocoderStatus.OK) {
-					 $("#lat").val(results[0].geometry.location.lat());
-					 $("#lng").val(results[0].geometry.location.lng());
-					 $.ajax({
-					  type: "POST",
-					  url: "php/DAO/sucuDAO.php",
-					  data: "accion="+(esActualizacion == true ? "actualizar":"guardar")+"&calendario="+JSON.stringify(cal.calendario)+"&tiempoEntreCitas="+$("#timepoEntreCitas").val()+"&idSucursal="+$("#idSucu").val()+"&"+$("#formSucursal").serialize(),
-					  async: false,
-					  dataType: "json",
-					  success: function(datos) {
-						  $('#addSucu').modal('hide');
-						  Notificacion('success',"Sucursal Guardada Exitosamente",'Mensaje');
-						  ObetnerAllSucursales();
+  			  geocoder.geocode({ 'address': $("#direccion").val() }, function (results, status) {
+  				if (status == google.maps.GeocoderStatus.OK) {
+  					 $("#lat").val(results[0].geometry.location.lat());
+  					 $("#lng").val(results[0].geometry.location.lng());
+  					 $.ajax({
+  					  type: "POST",
+  					  url: "php/DAO/sucuDAO.php",
+  					  data: "calendario="+JSON.stringify(cal.calendario)+"&accion=guardar",
+  					  async: false,
+  					  dataType: "json",
+  					  success: function(datos) {
+  						  $('#addSucu').modal('hide');
+  						  Notificacion('success',"Sucursal Guardada Exitosamente",'Mensaje');
+  						  ObetnerAllSucursales();
 
-					  }
-				  });
-				}else
-					 Notificacion('error',"La direccion de la agencia no es valida ",'Mensaje');
-			});
-		}else
-			 Notificacion('info',"Porfavor seleccione minimo un horario",'Mensaje');
-     }
- }
-
+  					  }
+  				  });
+  				}else
+  					 Notificacion('error',"La direccion de la agencia no es valida ",'Mensaje');
+  			});
+      }
+    }
 }
 
 function validaRangos(fila)

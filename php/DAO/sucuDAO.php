@@ -4,11 +4,14 @@ include '../Conexion/Conexion.php';
 switch ($_POST['accion']) {
 
 	case 'guardar':
+
+
 		    $array = json_decode($_POST['calendario']);
 		    $data['msj']='error';
 			$folio=0;
 			if(is_array($array))
 			{
+				print_r($array);
 			    $sql = new MySQL();
 			    $query="INSERT INTO sucursales VALUES('','".$_POST['sucursal']."',".$folio.",".$_POST['tiempoEntreCitas'].",'".$_POST['telefono']."','','','".$_POST['lat']."','".$_POST['lng']."','".utf8_decode($_POST['direccion'])."')";
 			    $sql->consulta($query);

@@ -20,6 +20,19 @@ if(isset($_SESSION['usuario']) ||isset($_SESSION["Admin"]))
     <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css" id="style-resource-1">
     <link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css" id="style-resource-2">
 
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Generic page styles -->
+    <link rel="stylesheet" href="fu/css/style.css">
+    <!-- blueimp Gallery styles -->
+    <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+    <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+    <link rel="stylesheet" href="fu/css/jquery.fileupload.css">
+    <link rel="stylesheet" href="fu/css/jquery.fileupload-ui.css">
+    <!-- CSS adjustments for browsers with JavaScript disabled -->
+    <noscript><link rel="stylesheet" href="fu/css/jquery.fileupload-noscript.css"></noscript>
+    <noscript><link rel="stylesheet" href="fu/css/jquery.fileupload-ui-noscript.css"></noscript>
+
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic" id="style-resource-3">
     <link rel="stylesheet" href="assets/css/bootstrap.css" id="style-resource-4">
     <link rel="stylesheet" href="assets/css/neon-core.css" id="style-resource-5">
@@ -98,6 +111,7 @@ if(isset($_SESSION['usuario']) ||isset($_SESSION["Admin"]))
             </div>
 
 
+                
 <div class="modal fade" id="addSucu">
     <div class="modal-dialog" id="sizeAddSucu" >
         <div class="modal-content" id="addSucuContent">
@@ -136,259 +150,155 @@ if(isset($_SESSION['usuario']) ||isset($_SESSION["Admin"]))
 							<input type="hidden" class="form-control" id="lat" name="lat" />
 							<input type="hidden" class="form-control" id="lng" name="lng" />
                     </div>
-                </div>
+                </div>     
                 </form>
-                 <div class="panel minimal minimal-gray">
-                    <div class="panel-heading">
-                        <div class="panel-title">
-                            <h4>Configurar Horario</h4></div>
-                        <div class="panel-options">
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a href="#tabAvanzado" data-toggle="tab">Avanzado</a></li>
-                               <!-- <li><a href="#tabTipico" data-toggle="tab">Tipico</a></li> -->
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tabAvanzado"> 
-                               <table class="table table-bordered table-responsive"  cellpadding="0" cellspacing="0" id="tblCalendario">
-                                     <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Dia</th>
-                                                <th class="col-md-4">TipoHorario</th>
-                                                <th>Hora Min</th>
-                                                <th>Hora Max</th>
-                                                <th id="headerMin">Hora Min</th>
-                                                <th id="headerMax">Hora Max</th>
-                                            </tr>
-                                     </thead>
-                                     <tbody>
-                                            <tr  style="height:5px;">
-                                                <td>
-                                                    <input type="checkbox"  class="icheck-2" tabindex="6" style="position: absolute; opacity: 0;">
-                                                </td>
-                                                <td>Lunes</td>
-                                                <td>
-                                                         <select name="test" class="selectboxit" data-first-option="true" name="tipoHorario" id="tipoHorario">
-                                                          <!--  <option value="0">Seleccione Horario</option> -->
-                                                            <option value="1">Corrido</option>
-                                                            <option value="2">Oficina</option>
-                                                        </select>
-                                                </td>
-                                                <td id="LOficinaMin">
-                                                        <div class="form-group" style="margin-bottom: 4px">
-                                                            <input type="text" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="9:00 AM" data-show-meridian="false" data-minute-step="5" id="horaMinIni" /> 
-                                                        </div>
-                                                </td>
-                                                <td  id="LOficinaMax">
-                                                    <div class="form-group" style="margin-bottom: 4px">
-                                                            <input type="text" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="9:00 AM" data-show-meridian="false" data-minute-step="5" id="horaMaxIni" /> 
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type="checkbox"  class="icheck-2" tabindex="6" style="position: absolute; opacity: 0;">
-                                                </td>
-                                                <td>Martes</td>
-                                                <td>
-                                                         <select name="test" class="selectboxit" data-first-option="true" name="tipoHorario" id="tipoHorario">
-                                                           <!--  <option value="0">Seleccione Horario</option> -->
-                                                            <option value="1">Corrido</option>
-                                                            <option value="2">Oficina</option>
-                                                        </select>
-                                                </td>
-                                                <td>
-                                                       <div class="form-group" style="margin-bottom: 4px">
-                                                            <input type="text" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="9:00 AM" data-show-meridian="false" data-minute-step="5" id="horaMinIni" /> 
-                                                     </div>
-                                                </td>
-                                                <td>
-                                                          <div class="form-group" style="margin-bottom: 4px">
-                                                            <input type="text" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="9:00 AM" data-show-meridian="false" data-minute-step="5" id="horaMaxIni" /> 
-                                                        </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type="checkbox"  class="icheck-2" tabindex="6" style="position: absolute; opacity: 0;">
-                                                </td>
-                                                <td>Miercoles</td>
-                                                <td>
-                                                         <select name="test" class="selectboxit" data-first-option="true" name="tipoHorario" id="tipoHorario">
-                                                            <!--  <option value="0">Seleccione Horario</option> -->
-                                                            <option value="1">Corrido</option>
-                                                            <option value="2">Oficina</option>
-                                                        </select>
-                                                </td>
-                                                <td>
-                                                        <div class="form-group" style="margin-bottom: 4px">
-                                                            <input type="text" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="9:00 AM" data-show-meridian="false" data-minute-step="5" id="horaMinIni" /> 
-                                                        </div>
-                                                </td>
-                                                <td>
-                                                        <div class="form-group" style="margin-bottom: 4px">
-                                                            <input type="text" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="9:00 AM" data-show-meridian="false" data-minute-step="5" id="horaMaxIni" /> 
-                                                        </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type="checkbox"  class="icheck-2" tabindex="6" style="position: absolute; opacity: 0;">
-                                                </td>
-                                                <td>Jueves</td>
-                                                <td>
-                                                         <select name="test" class="selectboxit" data-first-option="true" name="tipoHorario" id="tipoHorario">
-                                                            <!--  <option value="0">Seleccione Horario</option> -->
-                                                            <option value="1">Corrido</option>
-                                                            <option value="2">Oficina</option>
-                                                        </select>
-                                                </td>
-                                                <td>
-                                                        <div class="form-group" style="margin-bottom: 4px">
-                                                            <input type="text" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="9:00 AM" data-show-meridian="false" data-minute-step="5" id="horaMinIni" /> 
-                                                        </div>
-                                                </td>
-                                                <td>
-                                                        <div class="form-group" style="margin-bottom: 4px">
-                                                            <input type="text" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="9:00 AM" data-show-meridian="false" data-minute-step="5" id="horaMaxIni" /> 
-                                                        </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                <input type="checkbox"  class="icheck-2" tabindex="6" style="position: absolute; opacity: 0;">
-                                                </td>
-                                                <td>Viernes</td>
-                                                <td>
-                                                    <select name="test" class="selectboxit" data-first-option="true" name="tipoHorario" id="tipoHorario">
-                                                            <!--  <option value="0">Seleccione Horario</option> -->
-                                                            <option value="1">Corrido</option>
-                                                            <option value="2">Oficina</option>
-                                                        </select>
-                                                </td>
-                                                <td>
-                                                        <div class="form-group" style="margin-bottom: 4px">
-                                                            <input type="text" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="9:00 AM" data-show-meridian="false" data-minute-step="5" id="horaMinIni" /> 
-                                                        </div>
-                                                </td>
-                                                <td>
-                                                        <div class="form-group" style="margin-bottom: 4px">
-                                                            <input type="text" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="9:00 AM" data-show-meridian="false" data-minute-step="5" id="horaMaxIni" /> 
-                                                        </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type="checkbox"  class="icheck-2" tabindex="6" style="position: absolute; opacity: 0;">
-                                                </td>
-                                                <td>Sabado</td>
-                                                <td>
-                                                         <select name="test" class="selectboxit" data-first-option="true" name="tipoHorario" id="tipoHorario">
-                                                           <!--  <option value="0">Seleccione Horario</option> -->
-                                                            <option value="1">Corrido</option>
-                                                            <option value="2">Oficina</option>
-                                                        </select>
-                                                </td>
-                                                <td>
-                                                       <div class="form-group" style="margin-bottom: 4px">
-                                                            <input type="text" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="9:00 AM" data-show-meridian="false" data-minute-step="5" id="horaMinIni" /> 
-                                                        </div>
-                                                </td>
-                                                <td>
-                                                        <div class="form-group" style="margin-bottom: 4px">
-                                                            <input type="text" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="9:00 AM" data-show-meridian="false" data-minute-step="5" id="horaMaxIni" /> 
-                                                        </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type="checkbox"  class="icheck-2" tabindex="6" style="position: absolute; opacity: 0;">
-                                                </td>
-                                                <td>Domingo</td>
-                                                <td>
-                                                         <select name="test" class="selectboxit" data-first-option="true" name="tipoHorario" id="tipoHorario">
-                                                            <!--  <option value="0">Seleccione Horario</option> -->
-                                                            <option value="1">Corrido</option>
-                                                            <option value="2">Oficina</option>
-                                                        </select>
-                                                </td>
-                                                <td>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="9:00 AM" data-show-meridian="false" data-minute-step="5" id="horaMinIni" /> 
-                                                        </div>
-                                                </td>
-                                                <td>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="9:00 AM" data-show-meridian="false" data-minute-step="5" id="horaMaxIni" /> 
-                                                        </div>
-                                                </td>
-                                            </tr>
-                                     </tbody>
-                                </table>
-                            </div>
-                            <div class="tab-pane" id="tabTipico"> 
-                                  <div class="row">
-                                         <table class="table table-bordered table-responsive" id="tblCalendarioTipico">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Dia(s)</th>
-                                                    <th class="col-md-4">TipoHorario</th>
-                                                    <th>Hora Min</th>
-                                                    <th>Hora Max</th>
-                                                    <th id="headerMinTipico">Hora Min</th>
-                                                    <th id="headerMaxTipico">Hora Max</th>
-                                                </tr>
-                                         </thead>
-                                         <tbody>
-                                                <tr>
-                                                  <td>1</td>
-                                                    <td> 
-                                                          <a href="#"><i class="entypo-calendar"></i>
-                                                          <span class="title"> Lunes a Viernes </span></a></li>
-                                                    </td>
-                                                    <td>
-                                                        <select name="test" class="selectboxit" data-first-option="false" name="tipoHorarioTipico" id="tipoHorarioTipico">
-                                                        <option value="0">Seleccione Horario</option>
-                                                        <option value="1">Corrido</option>
-                                                        <option value="2">Oficina</option>
-                                                        </select>
-                                  
-                                                    </td>
-                                                    <td id="OficinaMin">
-                                                                <input type="text" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="9:00 AM" data-show-meridian="true" data-minute-step="5" id="horaMinIni" /> 
-                                                    </td>
-                                                    <td  id="LOficinaMax">
-                                                            <div class="">
-                                                                <input type="text" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="9:00 AM" data-show-meridian="true" data-minute-step="5" id="horaMaxIni" /> 
-                                                            </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                         </table>                                                                                    
-                                  </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Tiempo entre Citas </label>
-                            <div class="col-sm-5">
-                                <div class="input-spinner">
-                                    <button type="button" class="btn btn-default">-</button>
-                                    <input id="timepoEntreCitas" type="text" class="form-control size-1" value="1" data-min="0" data-max="60" />
-                                    <button type="button" class="btn btn-default">+</button>
-                                     <label class="col-sm-3 control-label">Minutos</label>   
+                    <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
+
+                        <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
+                        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+                        <div class="row fileupload-buttonbar" align="center"> 
+                            <div class="col-lg-12">
+                                <!-- The fileinput-button span is used to style the file input field as button -->
+                                <span class="btn btn-success fileinput-button">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                    <span>Agregar Imagenes...</span>
+                                    <input type="file" name="files[]" id="file" multiple>
+                                </span>
+                                <button type="submit" class="btn btn-primary start">
+                                    <i class="glyphicon glyphicon-upload"></i>
+                                    <span>Guardar Todo</span>
+                                </button>
+                                <button type="reset" class="btn btn-warning cancel">
+                                    <i class="glyphicon glyphicon-ban-circle"></i>
+                                    <span>Cancelar Todo</span>
+                                </button>
+                                <button type="button" class="btn btn-danger delete">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                    <span>Eliminar Todo</span>
+                                </button>
+                                <input type="checkbox" class="toggle">
+                                <!-- The global file processing state -->
+                                <span class="fileupload-process"></span>
+                            </div>
+                            <!-- The global progress state -->
+                            <div class="col-lg-5 fileupload-progress fade">
+                                <!-- The global progress bar -->
+                                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar progress-bar-success" style="width:0%;"></div>
                                 </div>
-                            </div>                       
+                                <!-- The extended global progress state -->
+                                <div class="progress-extended">&nbsp;</div>
+                            </div>
                         </div>
-                    </div>
+                        <!-- The table listing the files available for upload/download -->
+                        <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+                    </form>
                 </div>
+
+                <div class='row'>
+                    <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
+                        <div class="slides"></div>
+                        <h3 class="title"></h3>
+                        <a class="prev">‹</a>
+                        <a class="next">›</a>
+                        <a class="close">×</a>
+                        <a class="play-pause"></a>
+                        <ol class="indicator"></ol>
+                    </div>
+                    <!-- The template to display files available for upload -->
+                    <script id="template-upload" type="text/x-tmpl">
+                    {% for (var i=0, file; file=o.files[i]; i++) { %}
+                        <tr class="template-upload fade">
+                            <td>
+                                <span class="preview"></span>
+                            </td>
+                            <td>
+                                <p class="name">{%=file.name%}</p>
+                                <strong class="error text-danger"></strong>
+                            </td>
+                            <td>
+                                <p class="size">Processing...</p>
+                                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+                            </td>
+                            <td>
+                                {% if (!i && !o.options.autoUpload) { %}
+                                    <button class="btn btn-primary start" disabled>
+                                        <i class="glyphicon glyphicon-upload"></i>
+                                        <span>Guardar </span>
+                                    </button>
+                                {% } %}
+                                {% if (!i) { %}
+                                    <button class="btn btn-warning cancel">
+                                        <i class="glyphicon glyphicon-ban-circle"></i>
+                                        <span>Cancelar</span>
+                                    </button>
+                                {% } %}
+                            </td>
+                        </tr>
+                    {% } %}
+                    </script>
+                    <!-- The template to display files available for download -->
+                    <script id="template-download" type="text/x-tmpl">
+                    var cal.calendario=[];
+
+                    {% for (var i=0, file; file=o.files[i]; i++) {
+
+                        var count = Object.keys(cal.calendario).length;
+                        if(count > 0)
+                        {
+                            cal.calendario=[];
+                        }
+                        cal.calendario.push({ 
+                            "url" : file.thumbnailUrl,
+                            "name":file.name,
+                            "thumb"  :file.thumbnailUrl            
+                        });
+
+                     %}
+
+                        <tr class="template-download fade">
+                            <td>
+                                <span class="preview">
+                                    {% if (file.thumbnailUrl) { %}
+                                        <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+                                    {% } %}
+                                </span>
+                            </td>
+                            <td>
+                                <p class="name">
+                                    {% if (file.url) { %}
+                                        <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                                    {% } else { %}
+                                        <span>{%=file.name%}</span>
+                                    {% } %}
+                                </p>
+                                {% if (file.error) { %}
+                                    <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+                                {% } %}
+                            </td>
+                            <td>
+                                <span class="size">{%=o.formatFileSize(file.size)%}</span>
+                            </td>
+                            <td>
+                                {% if (file.deleteUrl) { %}
+                                    <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                        <span>Eliminar</span>
+                                    </button>
+                                    <input type="checkbox" name="delete" value="1" class="toggle">
+                                {% } else { %}
+                                    <button class="btn btn-warning cancel">
+                                        <i class="glyphicon glyphicon-ban-circle"></i>
+                                        <span>Cancelar</span>
+                                    </button>
+                                {% } %}
+                            </td>
+                        </tr>
+                    {% } %}
+                    </script>                
+                </div>                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -453,19 +363,48 @@ if(isset($_SESSION['usuario']) ||isset($_SESSION["Admin"]))
     <script src="assets/js/datatables/datatablesOriginal.js"></script>
     <script src="assets/js/bootstrap-datepicker.js"></script>
     <script src="assets/js/bootstrap-timepicker.min.js"></script>  
-    <script src="assets/js/jquery.validate.min.js"></script>
+  
     <script src="assets/js/joinable.js" id="script-resource-4"></script>
     <script src="assets/js/resizeable.js" id="script-resource-5"></script>
     <script src="assets/js/neon-api.js" id="script-resource-6"></script>
     <script src="assets/js/cookies.min.js" id="script-resource-7"></script>
-
     <script src="assets/js/selectboxit/jquery.selectBoxIt.min.js" ></script>
 
+     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+    <script src="fu/js/vendor/jquery.ui.widget.js"></script>
+    <!-- The Templates plugin is included to render the upload/download listings -->
+    <script src="//blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
+    <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+    <script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+    <!-- The Canvas to Blob plugin is included for image resizing functionality -->
+    <script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+    <!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- blueimp Gallery script -->
+    <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+    <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+    <script src="fu/js/jquery.iframe-transport.js"></script>
+    <!-- The basic File Upload plugin -->
+    <script src="fu/js/jquery.fileupload.js"></script>
+    <!-- The File Upload processing plugin -->
+    <script src="fu/js/jquery.fileupload-process.js"></script>
+    <!-- The File Upload image preview & resize plugin -->
+    <script src="fu/js/jquery.fileupload-image.js"></script>
+    <!-- The File Upload audio preview plugin -->
+    <script src="fu/js/jquery.fileupload-audio.js"></script>
+    <!-- The File Upload video preview plugin -->
+    <script src="fu/js/jquery.fileupload-video.js"></script>
+    <!-- The File Upload validation plugin -->
+    <script src="fu/js/jquery.fileupload-validate.js"></script>
+    <!-- The File Upload user interface plugin -->
+    <script src="fu/js/jquery.fileupload-ui.js"></script>
+    <!-- The main application script -->
+    <script src="fu/js/main.js"></script>
 
-
+    <script src="assets/js/jquery.validate.min.js"></script>
     <script src="assets/js/icheck/icheck.min.js" id="script-resource-18"></script>
     <script src="assets/js/alertify.min.js"></script>
-
     <script src="assets/js/toastr.js" id="script-resource-15"></script>
     <script src="assets/js/neon-chat.js" id="script-resource-16"></script>
     <!-- JavaScripts initializations and stuff -->
