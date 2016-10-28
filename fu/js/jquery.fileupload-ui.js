@@ -96,6 +96,18 @@
                 if (e.isDefaultPrevented()) {
                     return false;
                 }
+                var fileType = data.files[0].name.split('.').pop(), allowdtypes = 'jpeg,jpg,png,gif,JPG';
+                if (allowdtypes.indexOf(fileType) < 0) {
+                     Notificacion('error',"solo se permiten imagenes",'Mensaje');
+                    return false;
+                }
+
+
+                if(data.files[0]['size'] > 5000000) {
+                        Notificacion('error',"Archivo demasiado grande",'Mensaje');
+                        return false;
+                }
+
                 var $this = $(this),
                     that = $this.data('blueimp-fileupload') ||
                         $this.data('fileupload'),
@@ -320,6 +332,7 @@
                 if (e.isDefaultPrevented()) {
                     return false;
                 }
+                
                 var that = $(this).data('blueimp-fileupload') ||
                         $(this).data('fileupload');
                 that._resetFinishedDeferreds();

@@ -327,16 +327,20 @@ function Guardar(esActualizacion,idSucursal)
 {
 
   $('tbody.files tr').each(function(i, e) {
-    //according to @Brandon's comment it's now p.name
     var name = $(e).find('td').find('span.preview').find('a').attr('title'); 
     var size = $(e).find('td').find('p.name').find('a').attr('title');
     var imagen = $(e).find('td').find('span.preview').find('a').attr('href');  
     alert(name +" "+size+" "+imagen);    //etc.
+
+
 });
 
-LimpiarTablaFiles();
+var filesList = $('input[type="file"]').prop('files');
+ alert(JSON.stringify(filesList[0]));
 
- alert(JSON.stringify(myFile));
+LimpiarTablaFiles();
+$('#file').fileupload('add', {files: filesList});
+
   if($("#formSucursal").valid())
   {
 	    var count = Object.keys(cal.calendario).length;
@@ -435,9 +439,8 @@ function Asignar()
 function LimpiarTablaFiles()
 {
    $(".template-download").remove();
+   
    $('#fileupload').fileupload({
-        // Uncomment the following to send cross-domain cookies:
-        //xhrFields: {withCredentials: true},
         url: 'fu/server/php/index.php'
     });
 }
