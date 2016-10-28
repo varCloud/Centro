@@ -16,7 +16,7 @@ if(isset($_SESSION['usuario']) ||isset($_SESSION["Admin"]))
     <meta name="description" content="Neon Admin Panel" />
     <meta name="author" content="Laborator.co" />
     <link rel="icon" href="Imgs/icon.png">
-    <title>AdminTrans | Dalton</title>
+    <title>Centros Comerciales | </title>
     <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css" id="style-resource-1">
     <link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css" id="style-resource-2">
 
@@ -150,7 +150,43 @@ if(isset($_SESSION['usuario']) ||isset($_SESSION["Admin"]))
 							<input type="hidden" class="form-control" id="lat" name="lat" />
 							<input type="hidden" class="form-control" id="lng" name="lng" />
                     </div>
+                </div>  
+                <div class='row'>
+                            <div class="col-md-6">
+                                <div class="form-group">                            
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-facebook"></i></span> 
+                                        <input type="text" class="form-control" placeholder="url Facebook">
+                                   </div> 
+                                </div>  
+                           </div>
+                     <div class="col-md-6">
+                        <div class="form-group">                     
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-google-plus"></i></span> 
+                                <input type="text" class="form-control" placeholder="url Google">
+                           </div> 
+                        </div>  
+                    </div>   
                 </div>     
+                <div class='row'>
+                     <div class="col-md-6">
+                        <div class="form-group">              
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-twitter"></i></span> 
+                                <input type="text" class="form-control" placeholder="url Twitter">
+                           </div>  
+                        </div> 
+                    </div>  
+                     <div class="col-md-6">
+                        <div class="form-group"> 
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-instagram"></i></span> 
+                                <input type="text" class="form-control" placeholder="url Instagram">
+                           </div>   
+                        </div>
+                    </div>   
+                </div>                             
                 </form>
                 <div class="row">
                     <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
