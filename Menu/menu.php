@@ -37,7 +37,7 @@
 		}else  //PARA EL ROL ADMINISTRATIVO
 		{
 			echo '
-			<li class="has-sub"><a href="sucursales.php"><i class="entypo-home"></i><span class="title">Agencias</span></a></li>
+			<li class="has-sub"><a href="centros.php"><i class="entypo-home"></i><span class="title">Centros Comerciales</span></a></li>
 			<li class="has-sub"><a href="departamentos.php"><i class="entypo-drive"></i><span class="title">Departamentos</span></a></li>
 			<li class="has-sub"><a href="citas.php"><i class="entypo-book"></i><span class="title">Citas Servicios Automotrices</span></a></li>
 			<li class="has-sub"><a href="servicios.php"><i class="entypo-book-open"></i><span class="title">Servicios Traslados</span></a></li>

@@ -5,66 +5,81 @@ switch ($_POST['accion']) {
 
 	case 'guardar':
 
-
-		    $array = json_decode($_POST['calendario']);
+		    $array = json_decode($_POST['imgProyecto']);
 		    $data['msj']='error';
 			$folio=0;
 			if(is_array($array))
 			{
-				print_r($array);
-			    $sql = new MySQL();
-			    $query="INSERT INTO sucursales VALUES('','".$_POST['sucursal']."',".$folio.",".$_POST['tiempoEntreCitas'].",'".$_POST['telefono']."','','','".$_POST['lat']."','".$_POST['lng']."','".utf8_decode($_POST['direccion'])."')";
-			    $sql->consulta($query);
-			    $idSucursal= mysql_insert_id();
-				foreach($array as $obj){
-			     	  $query="INSERT INTO horarios VALUES('',". $obj->dia.",".$idSucursal.",".$obj->tipoHorario.",'".$obj->horaMin."','".$obj->horaMax."','".$obj->horaMinOfi."','".$obj->horaMaxOfi."')";
-			          $sql->consulta($query);
-			          $data['status']=1;
 
-				}
-				
-			    $query="INSERT INTO dptosxsucursal VALUES('',".$idSucursal.",1,'Servicio',1)";
-			    $sql->consulta($query);
-				$data['msj']='success';
+			    $sql = new MySQL();
+			    $query=" CALL SP_GUARDAR_PROYECTOS ('".utf8_decode($_POST['titulo'])."','".utf8_decode($_POST['descripcion'])."','".utf8_decode($_POST['direccion'])."','".$_POST['urlImagen']."','".$_POST['lat']."','".$_POST['lng']."','".$_POST['face']."','".$_POST['google']."','".$_POST['tuiter']."','".$_POST['inst']."')";
+			    $res=$sql->query($query);
+				if($res->num_rows > 0) 
+				{
+					$idActual = 0;
+					
+					while ($row = mysqli_fetch_array($res,MYSQLI_ASSOC)) {
+						    $idActual= $row['idActual'];
+
+					}  	
+					$res->close();
+                    //$sql->next_result();				
+					$sql = new MySQL();
+					foreach($array as $obj){
+				     	 $query="call  SP_GUARDA_IMG_PROYECTOS(".$idActual.", '".$obj->url."','".$obj->name."','".$obj->size."','".$obj->thumbnailUrl."','".$obj->deleteUrl."','".$obj->deleteType."')";
+				          $sql->query($query);
+				          $data['msj']="ok";
+				      }
+				}else
+				 	$resul['msj']='Error al ejecutar SP_GUARDAR_PROYECTOS';
 				
 			}else
 			{
-				$data['msj']='Error';
+				$data['msj']='Error la variable no es arrary';
 		
 			}
 			echo json_encode($data);
 	break;
 
-	case 'obtenerUnaSucursal' :
+	case 'obtenerProyectos' :
 
-			$sql = new MySQL();
-		    $query="SELECT S.*, D.descripcion dia_desc,H.*,T.descripcion horario_desc FROM sucursales S
-			inner join horarios H on S.idSucursal= H.idSucursal inner join dias D on D.idDia = H.idDia 
-			inner join tipohorarios T on T.idTipoHorario = H.idTipoHorario
-			where S.idSucursal=".$_POST['idSucursal']."  order  by H.idDia";
-		     $res = $sql->consulta($query);
+			 $sql = new MySQL();
+
+		     $query=" call SP_OBTENER_PROYECTOS(".$_POST['idProyecto'].")";
+		     $res = $sql->query($query);
 		     $i=0;
-		     while ($row = $sql->fetch_array($res)) {
-				$data[$i]['idSucursal']= $row['idSucursal'];
-				$data[$i]['descripcion']= $row['descripcion'];
-				$data[$i]['telefono']= $row['telefono'];
-				$data[$i]['calle']= $row['calle'];
-				$data[$i]['colonia']= $row['colonia'];
+		     while ($row = mysqli_fetch_array($res)) {
+				$data[$i]['idProyecto']= $row['idProyecto'];
+				$data[$i]['titulo']=utf8_encode($row['titulo']);
+				$data[$i]['descripcion']= utf8_encode($row['descripcion']);
+				$data[$i]['urlImagenPrincipal']= $row['urlImagenPrincipal'];
 				$data[$i]['lon']= $row['longitud'];
 				$data[$i]['lati']= $row['latitud'];
-				$data[$i]['dia_desc']= $row['dia_desc'];
-				$data[$i]['idHoraio']= $row['idHorario'];
-				$data[$i]['idTipoHorario']= $row['idTipoHorario'];
-				$data[$i]['horaMin']= $row['horaMin'];
-				$data[$i]['horaMax']= $row['horaMax'];
-				$data[$i]['horaMinOfi']= $row['horaMinOfi'];
-				$data[$i]['horaMaxOfi']= $row['horaMaxOfi'];
-				$data[$i]['horario_desc']= $row['horario_desc'];
-				$data[$i]['tiempoEntreCitas']= $row['tiempoEntreCitas'];
-				$data[$i]['direccion']= utf8_encode($row['direccionMapa']);
+				$data[$i]['urlFacebook']= $row['urlFacebook'];
+				$data[$i]['urlGooglePlus']= $row['urlGooglePlus'];
+				$data[$i]['urlInstagram']= $row['urlInstagram'];
+				$data[$i]['urlTwitter']= $row['urlTwitter'];
+				$data[$i]['direccion']= utf8_encode($row['direccion']);
+				$dbImgs = new MySQL();
+				$resImgs = $dbImgs->query("CALL SP_OBTENER_IMG_PROYECTOS(".$data[$i]['idProyecto'].")");
+			    $iImgs=0;
+				 while ($rowImg = mysqli_fetch_array($resImgs)) {
+
+				 		$img[$iImgs]['name']=$rowImg['name'];
+				 		$img[$iImgs]['size']=$rowImg['size'];
+				 		$img[$iImgs]['url']=$rowImg['url'];
+				 		$img[$iImgs]['thumbnailUrl']=$rowImg['thumbnailUrl'];
+				 		$img[$iImgs]['deleteUrl']=$rowImg['deleteUrl'];
+				 		$img[$iImgs]['deleteType']=$rowImg['deleteType'];
+				 		$iImgs++;
+
+				 }
+				 
+				 $age = array("files"=>$img);
+				 $data[$i]['files']=$age;
 				 $i++;
-				
         	}
+
         	echo json_encode($data);
 	break;
 
@@ -84,13 +99,11 @@ switch ($_POST['accion']) {
         	echo json_encode($data);
 		break;
 
-	case 'eliminarSucursal' :
-			$data['msj']='Ocurrio un error al eliminar los horarios de trabajo de la sucursal';
+	case 'eliminarProyecto' :
 			$sql = new MySQL();
-			
-			$query="call SP_ELIMINAR_SUCURSAL(".$_POST['idSucursal'].")";
-		    $sql->consulta($query);
-			$data['msj']='success';
+			$query="call SP_ELIMINAR_PROYECTO(".$_POST['idProyecto'].")";
+		    $sql->query($query);
+			$data['msj']="ok";
         	echo json_encode($data);
 		break;
 	

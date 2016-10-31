@@ -166,5 +166,5 @@ function OcultarLoader(msj)
 }
 
 $( document ).ready(function() {
-	ObtenerCitasDiarias();
+
 });

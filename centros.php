@@ -8,7 +8,7 @@ if(isset($_SESSION['usuario']) ||isset($_SESSION["Admin"]))
  
 <!DOCTYPE html>
 <html lang="en">
-<!-- Mirrored from demo.neontheme.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 May 2016 13:27:56 GMT -->
+
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -23,7 +23,7 @@ if(isset($_SESSION['usuario']) ||isset($_SESSION["Admin"]))
 
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <!-- Generic page styles -->
-    <link rel="stylesheet" href="fu/css/style.css">
+
     <!-- blueimp Gallery styles -->
     <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
     <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
@@ -64,43 +64,42 @@ if(isset($_SESSION['usuario']) ||isset($_SESSION["Admin"]))
         <div class="main-content" >
           <?php include 'Header/header.php';?>   
             <hr />
-  <h2>Agencias</h2>
+  <h2>Proyectos</h2>
 
             <br />
              <div class="panel panel-primary" id="charts_env">
                 <div class="panel-heading">
                     <div class="panel-title"></div>
                     <div class="panel-options">
-				<?php
-					if  ($_SESSION["idRol"] == '0' || $_SESSION["idRol"] == '1')
-							echo '
-                    <button class="btn btn-primary btn-icon icon-left" style="top:4px" type="button" id="btnAddSucu">
+
+                    <button class="btn btn-primary btn-icon icon-left" style="top:4px" type="button" id="btnAddProyecto">
                              <i class="entypo-list-add"></i> Agregar
         			 </button>';
-				?>
                     </div>
                 </div>
                 <div class="panel-body">
                     <div class="tab-pane active">
                         <div class="t" id="area-chart">
-                             <table class="table table-bordered datatable" id="tblSucursales">
+                             <table class="table table-bordered datatable" id="tblProyectos">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Agencia</th>
-                                        <th>Folio Actual</th>
-                                        <th>Tiempo entre citas</th>
+                                        <th>Proyecto</th>
+                                        <th>Descripcion</th>
+                                        <th>Dirección</th>
+                                        <th>Imagen</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
-                                <tbody id="bodySucu">
+                                <tbody id="bodyProy">
                                 </tbody>
                                  <tfoot>
                                     <tr>
                                         <th>#</th>
-                                        <th>Agencia</th>
-                                        <th>Folio Actual</th>
-                                        <th>Tiempo entre citas</th>
+                                        <th>Proyecto</th>
+                                        <th>Descripcion</th>
+                                        <th>Dirección</th>
+                                        <th>Imagen</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </tfoot>
@@ -112,20 +111,20 @@ if(isset($_SESSION['usuario']) ||isset($_SESSION["Admin"]))
 
 
                 
-<div class="modal fade" id="addSucu">
-    <div class="modal-dialog" id="sizeAddSucu" >
-        <div class="modal-content" id="addSucuContent">
+<div class="modal fade" id="addProyecto">
+    <div class="modal-dialog" id="sizeAddProyecto" style="width: 65%" >
+        <div class="modal-content" id="addProyectoContent">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Agregar Agencia</h4>
             </div>
             <div class="modal-body">
-            <form role="form" id="formSucursal" method="post" class = "validate" >
+            <form role="form" id="formProyecto" method="post" class = "validate" >
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="field-1" class="control-label">Agencia</label>
-                            <input type="text" class="form-control" id="sucursal" name="sucursal" placeholder="Agencia" data-validate="required" data-message-required="Porfavor especifique una sucursal">
+                            <label for="field-1" class="control-label">Titulo del Proyecto</label>
+                            <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Proyecto" data-validate="required" data-message-required="Porfavor especifique un proyecto">
                             <input type="hidden" name="idSucu" id="idSucu"  value="0" />
                         </div>
                     </div>
@@ -144,11 +143,20 @@ if(isset($_SESSION['usuario']) ||isset($_SESSION["Admin"]))
                                      <label class="control-label">Dirección</label>
                                     <input type="text" class="form-control" id="direccion" 
 									name="direccion" placeholder="Ejm. Curtidores de Teremendo 423, Vasco de Quiroga, Morelia, México" data-validate="required" 
-									data-message-required="Porf avor especifique una direccion tipo Google Maps" />
+									data-message-required="Por favor especifique una direccion tipo Google Maps" />
 									<span style="color: blue; font-size: 11px; padding: 3px;">Formato de búsqueda: calle, número, colonia, ciudad y estado.</span>
                             </div>
 							<input type="hidden" class="form-control" id="lat" name="lat" />
 							<input type="hidden" class="form-control" id="lng" name="lng" />
+                    </div>
+                    <div class="col-md-12">
+                            <div class="form-group">
+                                     <label class="control-label">Descripción</label>
+                                    <Textarea  class="form-control" id="descripcion" 
+                                    name="descripcion" placeholder="Descripción del proyecto" data-validate="" 
+                                    data-message-required="" ></Textarea>
+
+                            </div>
                     </div>
                 </div>  
                 <div class='row'>
@@ -156,7 +164,7 @@ if(isset($_SESSION['usuario']) ||isset($_SESSION["Admin"]))
                                 <div class="form-group">                            
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-facebook"></i></span> 
-                                        <input type="text" class="form-control" placeholder="url Facebook">
+                                        <input type="text" name="face" id="face" class="form-control" placeholder="url Facebook" >
                                    </div> 
                                 </div>  
                            </div>
@@ -164,7 +172,7 @@ if(isset($_SESSION['usuario']) ||isset($_SESSION["Admin"]))
                         <div class="form-group">                     
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-google-plus"></i></span> 
-                                <input type="text" class="form-control" placeholder="url Google">
+                                <input type="text" class="form-control" name="google" id="google" placeholder="url Google">
                            </div> 
                         </div>  
                     </div>   
@@ -174,7 +182,7 @@ if(isset($_SESSION['usuario']) ||isset($_SESSION["Admin"]))
                         <div class="form-group">              
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-twitter"></i></span> 
-                                <input type="text" class="form-control" placeholder="url Twitter">
+                                <input type="text" class="form-control" name="tuiter" id="tuiter"placeholder="url Twitter"> 
                            </div>  
                         </div> 
                     </div>  
@@ -182,7 +190,7 @@ if(isset($_SESSION['usuario']) ||isset($_SESSION["Admin"]))
                         <div class="form-group"> 
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-instagram"></i></span> 
-                                <input type="text" class="form-control" placeholder="url Instagram">
+                                <input type="text" class="form-control" name="inst" id="inst" placeholder="url Instagram">
                            </div>   
                         </div>
                     </div>   
@@ -396,7 +404,7 @@ if(isset($_SESSION['usuario']) ||isset($_SESSION["Admin"]))
     <script src="assets/js/bootstrap.js" id="script-resource-3"></script>
     <script src="assets/js/gsap/TweenMax.min.js" id="script-resource-1"></script>
     <script src="assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js" id="script-resource-2"></script>
-    <script src="assets/js/datatables/datatablesOriginal.js"></script>
+
     <script src="assets/js/bootstrap-datepicker.js"></script>
     <script src="assets/js/bootstrap-timepicker.min.js"></script>  
   
@@ -443,6 +451,7 @@ if(isset($_SESSION['usuario']) ||isset($_SESSION["Admin"]))
     <script src="assets/js/alertify.min.js"></script>
     <script src="assets/js/toastr.js" id="script-resource-15"></script>
     <script src="assets/js/neon-chat.js" id="script-resource-16"></script>
+    <script src="assets/js/datatables/datatablesOriginal.js"></script>
     <!-- JavaScripts initializations and stuff -->
     <script src="assets/js/neon-custom.js" id="script-resource-17"></script>
     

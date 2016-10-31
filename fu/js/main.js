@@ -58,8 +58,8 @@ $(function () {
     } else {
         // Load existing files:
         $('#fileupload').addClass('fileupload-processing');
-        alert($('#fileupload').fileupload('option', 'url'));
-        alert( $('#fileupload')[0]);
+        //alert($('#fileupload').fileupload('option', 'url'));
+       // alert( $('#fileupload')[0]);
         $.ajax({
             // Uncomment the following to send cross-domain cookies:
             //xhrFields: {withCredentials: true},
@@ -69,8 +69,9 @@ $(function () {
         }).always(function () {
             $(this).removeClass('fileupload-processing');
         }).done(function (result) {
-            $(this).fileupload('option', 'done')
-                .call(this, $.Event('done'), {result: result});
+            alert(JSON.stringify(result));
+           // $(this).fileupload('option', 'done')
+           //     .call(this, $.Event('done'), {result: result});
         });
     }
 
